@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryan Sharma Portfolio</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Global */
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      /* Static spacey gradient background */
+      background: radial-gradient(circle at 20% 40%, #2a1a3d 0%, #000000 100%);
+      color: white;
+      cursor: none;
+    }
+    ::-webkit-scrollbar { display: none; }
+    /* Glass effect panels */
+    .glass { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); border-radius: 1rem; }
+    /* Nav */
+    nav { position: fixed; top: 0; width: 100%; z-index: 50; display: flex; justify-content: center; padding: 1rem 0; background: rgba(0,0,0,0.5); }
+    nav a { margin: 0 1rem; color: #81E6D9; font-weight: 500; transition: color .3s; }
+    nav a:hover { color: #D53F8C; }
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hero-text { font-size: 1.5rem; margin-bottom: .5rem; }
+    .hero-name { display: inline-flex; }
+    .hero-letter { font-size: 4rem; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    /* Cursor */
+    .cursor-dot { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background: rgba(210,250,255,0.8); border-radius:50%; pointer-events:none; transform: translate(-50%, -50%); animation: expand 0.4s ease-out forwards; }
+    @keyframes expand { to { transform: translate(-50%, -50%) scale(2); opacity:0; } }
+    /* Section titles */
+    .section-title { font-size: 2.5rem; margin-bottom: 1rem; position: relative; display:inline-block; }
+    .section-title::after { content: ''; position: absolute; width: 50%; height: 4px; background: #81E6D9; left:0; bottom:-8px; border-radius:2px; }
+    /* Card carousel */
+    .carousel { display: flex; gap:1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom:1rem; }
+    .carousel::-webkit-scrollbar { display: none; }
+    .card { min-width: 280px; scroll-snap-align: center; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border-radius:1rem; padding:1.5rem; transition: transform .3s; }
+    .card:hover { transform: translateY(-10px); }
+  </style>
+</head>
+<body>
+  <!-- Cursor Effect -->
+  <script>
+    document.addEventListener('mousemove', e => {
+      const dot = document.createElement('div');
+      dot.className = 'cursor-dot';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+      document.body.append(dot);
+      setTimeout(() => dot.remove(), 400);
+    });
+  </script>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <p class="hero-text glass px-4 py-2">Hi there, I'm</p>
+    <h1 class="hero-name glass px-6 py-4">
+      <!-- Letters split for animation -->
+      <span class="hero-letter" style="animation-delay:.2s">A</span>
+      <span class="hero-letter" style="animation-delay:.4s">r</span>
+      <span class="hero-letter" style="animation-delay:.6s">y</span>
+      <span class="hero-letter" style="animation-delay:.8s">a</span>
+      <span class="hero-letter" style="animation-delay:1s">n</span>
+      &nbsp;
+      <span class="hero-letter" style="animation-delay:1.2s">S</span>
+      <span class="hero-letter" style="animation-delay:1.4s">h</span>
+      <span class="hero-letter" style="animation-delay:1.6s">a</span>
+      <span class="hero-letter" style="animation-delay:1.8s">r</span>
+      <span class="hero-letter" style="animation-delay:2s">m</span>
+      <span class="hero-letter" style="animation-delay:2.2s">a</span>
+    </h1>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="flex flex-col items-center justify-center min-h-screen px-8 glass m-8">
+    <h2 class="section-title">About Me</h2>
+    <img src="IMG_20240304_064818097.png" alt="Aryan" class="w-64 h-64 rounded-full border-4 border-teal-300 mb-4 object-cover" />
+    <p class="text-lg text-center max-w-2xl">
+      I'm a 2nd-year CSE student at Graphic Era Hill University who has tackled over 900 coding challenges across multiple platforms. My passion lies in creating ML-powered and algorithmic solutions to reduce food waste and streamline inventory management for quick-commerce.
+    </p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="min-h-screen px-8 glass m-8">
+    <h2 class="section-title">Projects</h2>
+    <div class="carousel">
+      <div class="card">
+        <h3 class="text-xl font-semibold mb-2">Food Wastage & Inventory</h3>
+        <p>ML-driven demand forecasting and spoilage alerts for quick-commerce.</p>
+        <a href="#" class="text-teal-300 underline mt-2 inline-block">Learn More</a>
+      </div>
+      <div class="card">
+        <h3 class="text-xl font-semibold mb-2">Text-to-Speech & Speech-to-Text Converter</h3>
+        <p>I built a bidirectional converter using the Web Speech API to seamlessly toggle between voice and text inputs.</p>
+        <a href="#" class="text-teal-300 underline mt-2 inline-block">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="min-h-screen px-8 glass m-8">
+    <h2 class="section-title">Achievements</h2>
+    <div class="carousel">
+      <div class="card">
+        <h3 class="font-semibold mb-1">900+ Problems Solved</h3>
+        <p>Codeforces, LeetCode, CodeChef</p>
+      </div>
+      <div class="card">
+        <h3 class="font-semibold mb-1">CF Peak Rating 1024</h3>
+        <p>Top 30% in Div.2</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="flex flex-col items-center justify-center min-h-screen px-8 glass m-8">
+    <h2 class="section-title">Contact</h2>
+    <p class="mb-2">📧 <a href="mailto:ganbarearyan45@gmail.com" class="text-teal-300">ganbarearyan45@gmail.com</a></p>
+    <p class="mb-4">📞 <a href="tel:+919368400467" class="text-teal-300">+91 9368400467</a></p>
+    <a href="AryanSharmaResume.pdf" target="_blank" class="px-6 py-3 bg-teal-400 text-black rounded">Download CV</a>
+  </section>
+
+  <!-- Social Footer -->
+  <footer class="text-center p-4">
+    <div class="flex justify-center gap-4">
+      <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/81E6D9/github.png" alt="GitHub"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/81E6D9/linkedin.png" alt="LinkedIn"/></a>
+    </div>
+  </footer>
+
+</body>
+</html>
