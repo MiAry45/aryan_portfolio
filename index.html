@@ -6,6 +6,8 @@
   <title>Aryan Sharma Portfolio</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Typed.js for dynamic tagline -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <style>
     /* Global */
     html { scroll-behavior: smooth; }
@@ -16,6 +18,15 @@
       background: radial-gradient(circle at 20% 40%, #2a1a3d 0%, #000000 100%);
       color: white;
       cursor: none;
+      overflow-x: hidden;
+    }
+    canvas.starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
     ::-webkit-scrollbar { display: none; }
     /* Glass effect panels */
@@ -44,6 +55,7 @@
   </style>
 </head>
 <body>
+  <canvas class="starfield"></canvas>
   <!-- Cursor Effect -->
   <script>
     document.addEventListener('mousemove', e => {
@@ -83,6 +95,7 @@
       <span class="hero-letter" style="animation-delay:2s">m</span>
       <span class="hero-letter" style="animation-delay:2.2s">a</span>
     </h1>
+    <p id="tagline" class="text-teal-300 text-xl mt-2"></p>
   </section>
 
   <!-- About Section -->
@@ -141,6 +154,51 @@
       <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/81E6D9/linkedin.png" alt="LinkedIn"/></a>
     </div>
   </footer>
+
+  <!-- Typed tagline & starfield scripts -->
+  <script>
+    new Typed('#tagline', {
+      strings: ['Futuristic Developer', 'ML Enthusiast', 'Code Problem Solver'],
+      typeSpeed: 60,
+      backSpeed: 30,
+      loop: true
+    });
+
+    const canvas = document.querySelector('.starfield');
+    const ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    const stars = Array.from({ length: 200 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      z: Math.random() * canvas.width
+    }));
+    function animate() {
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        s.z -= 2;
+        if (s.z <= 0) {
+          s.x = Math.random() * canvas.width;
+          s.y = Math.random() * canvas.height;
+          s.z = canvas.width;
+        }
+        const sx = (s.x - canvas.width / 2) * (canvas.width / s.z) + canvas.width / 2;
+        const sy = (s.y - canvas.height / 2) * (canvas.width / s.z) + canvas.height / 2;
+        const radius = canvas.width / s.z;
+        ctx.beginPath();
+        ctx.arc(sx, sy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
 
 </body>
 </html>
